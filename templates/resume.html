@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="slides">
+    <div class="banner-top" id="banner-pic">
+        <div class="banner-title">
+      <h1 class="res-title">Robert D. Clifton</h1>
+        </div>
+        <div class="res-button">
+            <form method="get" action="/static/RobertClifton_Resume.pdf">
+            <button class="button">Download My Resume </button>
+            </form>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="slide-title">
+            <h2>Technologies</h2>
+            <div class="text-underline"></div>
+        </div>
+        <div class="slide-info">
+            <div class="slide-child">
+                <h3>Programming Languages</h3>
+                <ul>
+                    <li><h4>C / C++</h4></li>
+                    <li><h4>Java</h4></li>
+                    <li><h4>Javascript</h4></li>
+                    <li><h4>Python</h4></li>
+                    <li><h4>PHP (Limited)</h4></li>
+                    <li><h4>Ruby (Limited)</h4></li>
+                    <li><h4>Swift (Limited)</h4></li>
+                </ul>
+            </div>
+            <div class="slide-child">
+                <h3>Databases</h3>
+                <ul>
+                    <li><h4>MySQL</h4></li>
+                    <li><h4>NoSQL</h4></li>
+                    <li><h4>MongoDB</h4></li>
+                </ul>
+            </div>
+            <div class="slide-child">
+                <h3>Frameworks & Technologies</h3>
+                <ul>
+                    <li><h4>AWS</h4></li>
+                    <li><h4>Flask</h4></li>
+                    <li><h4>Google Cloud Platform</h4></li>
+                    <li><h4>Grunt</h4></li>
+                    <li><h4>jQuery</h4></li>
+                    <li><h4>melonJS</h4></li>
+                    <li><h4>Node.JS</h4></li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-title">
+            <h2>Education</h2>
+            <div class="text-underline"></div>
+        </div>
+        <div class="slide-info">
+            <div class="slide-child">
+                <h3>Bachelor of Science: Computer Science </h3>
+                <h4>Oregon State University, Corvallis, OR, September 2015 - September 2017</h4>
+            </div>
+            <div class="slide-child">
+                <h3>Bachelor of Science: Business Administrationv</h3>
+                <h4>Oregon State University, Corvallis, OR, September 2005 - March 2010</h4>
+            </div>
+            <div class="slide-child">
+                <h3>International Business Exchange Program</h3>
+                <h4>Wirtschaftsuniversität, Vienna, Austria, Fall 2009</h4>
+            </div>
+        </div>
+        <div class="slide-title">
+            <h2>Work Experience</h2>
+            <div class="text-underline"></div>
+        </div>
+                <div class="slide-info">
+            <div class="slide-child">
+                <h3>Freelance Web Developer </h3>
+                <h4><b>Felix Garoz/TextoAD.com, September 2016 - Present</b></h4>
+                <h4>Maintain a complex real estate listing website; design, develop, test, and deploy new features using Javascript, Node.js, Git, and Heroku.</h4>
+            </div>
+            <div class="slide-child">
+                <h3>Penske Truck Leasing</h3>
+                <h4><b>Portland, OR, March 2011 - Present</b></h4>
+                <ul>
+                    <li><h4>Rental Representative: assist in truck rental operations; move to various locations district-wide to assist in stabilizing operations and training new employees. </h4></li>
+                    <li><h4>Assistant Rental Manager: managed rental operations and sales; consistently met sales goals and improved customer retention and satisfaction.</h4></li>
+                    <li><h4>Hiking Coordinator: served as rental logistics coordinator for Oregon; oversaw department of forty rental agents and twelve fleet drivers.</h4></li>
+                    <li><h4>Management Trainee: managed fleet of approximately 100 rental trucks; developed skills in rental sales, customer service, and operations.</h4></li>
+                </ul>
+            </div>
+            <div class="slide-child">
+                <h3>Costco Wholesale</h3>
+                <h4><b>Portland, OR, June 2007 - September 2010</b></h4>
+                <h4>College Retention Associate: front end assistant, cashier, and utility stocker; entrusted to respond to complex customer service issues. </h4>
+            </div>
+        </div>
+        <div class="slide-title">
+            <h2>Projects</h2>
+            <div class="text-underline"></div>
+        </div>
+        <div class="slide-info">
+            <div class="slide-child">
+                <h3>This Website</h3>
+                <h4><b>Personal Project: Fall 2017</b></h4>
+                <h4>I made dis</h4>
+            </div>
+            <div class="slide-child">
+                <h3>Web-Based Real Time Strategy Game</h3>
+                <h4><b>Class Project: Spring 2017</b></h4>
+                <h4>Term long group project using melonJS to create a web-based RTS game that included: animations, music, A.I., save storage, pathfinding, and collisions.</h4>
+            </div>
+            <div class="slide-child">
+                <h3>Zip Code Radial Search Server</h3>
+                <h4><b>Personal Project: Winter 2017</b></h4>
+                <h4>Created a zip code database from text file, then built a simple website that could calculate and query to produce a list of near-by zip codes.</h4>
+            </div>
+            <div class="slide-child">
+                <h3>Automated SMS and Webpage</h3>
+                <h4><b>Freelance Project: Fall 2016</b></h4>
+                <h4>Built a mobile friendly webpage for real estate listings, and created an automated system using Twilio’s API to respond to SMS messages with link.</h4>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

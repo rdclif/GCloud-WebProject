@@ -6,8 +6,7 @@
 # TODO: Enter your application id below. If you have signed up
 # using cloud.google.com/console use the "project id" for your application
 # id.
-application: r-clifton
-runtime: python3
+runtime: python
 env: flex
 entrypoint: gunicorn -b :$PORT main:app
 

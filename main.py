@@ -29,6 +29,10 @@ def blog():
     out['admin'] = admin
     return render_template('blog.html', data = out)
 
+@app.route('/resume')
+def about():
+    return render_template('resume.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
