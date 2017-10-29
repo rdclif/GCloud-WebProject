@@ -1,36 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="{{url_for('static', filename='S5002057.jpg')}}" class="pic">
+    <div class="head-container">
+        <div class="head-slide">
+            <h4>hello...</h4>
+            <h1 class="res-title">MY PASSIONS AND PERSONALITY</h1>
         </div>
-
-        <div class="item">
-          <img src="{{url_for('static', filename='IMG_0413.jpg')}}" class="pic">
+    </div>
+    <div class="image-slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="circular-portrait">
+                        <img src="/static/img/IMG_1ME.jpg">
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <h4>About Me</h4>
+                    <p><i>My name is Robert...Blah Blah, I am Special...</i></p>
+                </div>
+            </div>
         </div>
-
-        <div class="item">
-          <img src="{{url_for('static', filename='IMG_1176.jpg')}}" class="pic">
+    </div>
+    <div class="img-div">
+        <img src="/static/img/IMG_1001.jpg">
+    </div>
+    <div class="moreinfo-slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><h4><i>Robert is a computer scientist who enjoys exploring technology and how it impacts and shapes this experience we call life.</i></h4></p>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    </div>
+    <div class="img-div-too">
+        <img src="/static/img/IMG_1001.jpg">
+    </div>
+    <div class="moreinfo-slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Maybe More Stuff... </h4>
+                    <p><i>I like Beer and Wine and Oregon and stuff...</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-slide">
+        <div class="container" id="col">
+            <div class="row">
+                <div class="col-sm-3" id="row" >
+                    <img src="/static/img/IMG_0408.jpg">
+                </div>
+                <div class="col-sm-3" id="row">
+                    <img src="/static/img/IMG_1508.jpg">
+                </div>
+                <div class="col-sm-3" id="row">
+                    <img src="/static/img/S5002057.jpg">
+                </div>
+                <div class="col-sm-3" id="row">
+                    <img src="/static/img/IMG_1176.jpg">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

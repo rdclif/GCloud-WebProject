@@ -58,6 +58,12 @@
     background-color: #111;
 }
 
+footer {
+    width: 100%;
+    text-align: center;
+}
+
+
 /*
 ------- Hamburger and Animation --------
 */
@@ -158,7 +164,7 @@
     color: black;
     width: 100%;
     height: 100vh;
-    background-image: url("/static/IMG_0413.jpg");
+    background-image: url("/static/img/IMG_0413.jpg");
     overflow: hidden;
     background-size: cover;
 }
@@ -185,12 +191,15 @@
     text-decoration: underline overline;
     margin-top: 0px;
     padding-top: 15%;
-
 }
 
 .slides h2 {
     font-size: 5rem;
     margin-bottom: 0px;
+}
+
+.slides h3 {
+    color: #343434;
 }
 
 .slides h4 {
@@ -233,4 +242,176 @@
 .button:hover {
     background-color: white;
     color: black;
+}
+
+/*
+------- Home Header --------
+*/
+
+.head-container {
+    font-family: "Arial Narrow", Arial, sans-serif;
+    color: black;
+    width: 100%;
+    height: 50vh;
+    background-image: url("/static/img/IMG_WALK.JPG");
+    overflow: hidden;
+    background-size: cover;
+}
+
+.head-slide {
+    text-align: center;
+    align-items: center;
+    padding-top: 10%;
+    background: rgba(1,1,1,0.5);
+    width: 100%;
+    height: 100%;
+}
+
+.head-container h1 {
+    font-size: 5rem;
+    font-family: "Arial Narrow", Arial, sans-serif;
+    color: white;
+    margin-top: 0px;
+
+}.head-container h4 {
+    font-family: cursive;
+    font-size: 2rem;
+    color: white;
+ }
+
+
+
+ /*
+------- Contact Header --------
+*/
+
+.head-container-contact {
+    font-family: "Arial Narrow", Arial, sans-serif;
+    color: black;
+    width: 100%;
+    height: 50vh;
+    background-image: url("/static/img/IMG_PDX.png");
+    overflow: hidden;
+    background-size: cover;
+}
+
+.head-slide-contact {
+    text-align: center;
+    align-items: center;
+    padding-top: 10%;
+    background: rgba(1,1,1,0.5);
+    width: 100%;
+    height: 100%;
+}
+
+.head-container-contact h1 {
+    font-size: 5rem;
+    font-family: "Arial Narrow", Arial, sans-serif;
+    color: white;
+    margin-top: 0px;
+
+}.head-container-contact h4 {
+    font-family: cursive;
+    font-size: 2rem;
+    color: white;
+ }
+
+
+
+ /*
+---- Bootstrap override ----
+*/
+
+@media (min-width: 992px) {
+    #col {
+        width: unset;
+    }
+
+}
+
+@media (min-width: 768px) {
+    #col {
+        width: unset;
+    }
+}
+
+ #col {
+     padding-right: 0px;
+     padding-left: 0px;
+ }
+
+ #row {
+     padding-right: 0px;
+     padding-left: 0px;
+ }
+
+ /*
+------- About Slides --------
+*/
+
+
+.image-slide {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.body-slide img {
+    width: 100%;
+}
+
+.moreinfo-slide {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+ /*
+------- About Image Adj --------
+*/
+
+
+.circular-portrait {
+    text-align: center;
+    clip-path: circle(75px at center);
+}
+
+.circular-portrait img {
+    width: 200px;
+}
+
+
+ /*
+------- About Image Divs --------
+*/
+
+.img-div {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+
+.img-div img {
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    min-width: 1000px;
+}
+
+.img-div-too {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+
+.img-div-too img {
+    position: absolute;
+    top: -50px;
+    width: 100%;
+    min-width: 1000px;
+}
+
+
+.contact-info ul {
+    list-style-type: none;
 }
