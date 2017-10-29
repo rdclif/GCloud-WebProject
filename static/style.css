@@ -372,6 +372,7 @@ footer {
 .circular-portrait {
     text-align: center;
     clip-path: circle(75px at center);
+    -webkit-clip-path: circle(75px at center); /* Safari */
 }
 
 .circular-portrait img {
@@ -406,12 +407,14 @@ footer {
 
 .img-div-too img {
     position: absolute;
-    top: -50px;
+    top: -80px;
     width: 100%;
     min-width: 1000px;
 }
 
-
+ /*
+------- contact info --------
+*/
 .contact-info ul {
     list-style-type: none;
 }
