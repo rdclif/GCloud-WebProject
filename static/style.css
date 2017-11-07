@@ -64,14 +64,9 @@
     display: none;
 }
 
-/* Change the link color to #111 (black) on hover */
+
 .menu-bar li a:hover {
     background-color: #111;
-}
-
-footer {
-    width: 100%;
-    text-align: center;
 }
 
 
@@ -465,3 +460,14 @@ footer {
     background-size: cover;
     background-position: center center;
 }
+
+/*
+------- footer --------
+*/
+footer {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
