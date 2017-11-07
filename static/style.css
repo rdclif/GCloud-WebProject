@@ -450,6 +450,8 @@ footer {
 ------- To Top Button --------
 */
 #tpBttn {
+    height: 40px;
+    width: 40px;
     display: none;
     position: fixed;
     bottom: 20px;
@@ -457,7 +459,14 @@ footer {
     z-index: 99;
     border: none;
     outline: none;
-    background-color: #333;
     color: white;
-    padding: 10px;
+    background-image: url("/static/img/if_aiga_uparrow_inv_134123.png");
+    background-color: Transparent;
+    background-size: cover;
+    background-position: center center;
+}
+
+#tpBttn img {
+    width: 100%;
+    height: auto;
 }

@@ -57,7 +57,7 @@ $(document).ready(function() {
     //check scroll for top button
     $(window).scroll(function(){
         if($( window ).width() < "600") {
-            if ($(this).scrollTop() > 50) {
+            if ($(this).scrollTop() > 100) {
                 $('#tpBttn').fadeIn("medium");
             } else {
                 $('#tpBttn').fadeOut("medium");
