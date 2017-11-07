@@ -450,8 +450,8 @@ footer {
 ------- To Top Button --------
 */
 #tpBttn {
-    height: 40px;
-    width: 40px;
+    height: 55px;
+    width: 55px;
     display: none;
     position: fixed;
     bottom: 20px;
@@ -464,9 +464,4 @@ footer {
     background-color: Transparent;
     background-size: cover;
     background-position: center center;
-}
-
-#tpBttn img {
-    width: 100%;
-    height: auto;
 }
