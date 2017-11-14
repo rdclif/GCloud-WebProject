@@ -2,10 +2,9 @@
 # including URL routing, versions, static file uploads, etc. See
 # https://developers.google.com/appengine/docs/python/config/appconfig
 # for details.
+#
 
-# TODO: Enter your application id below. If you have signed up
-# using cloud.google.com/console use the "project id" for your application
-# id.
+
 runtime: python
 env: flex
 entrypoint: gunicorn -b :$PORT main:app
@@ -15,7 +14,9 @@ runtime_config:
 
 #[START env]
 env_variables:
-    CLOUD_STORAGE_BUCKET: r-clifton
+    #CLOUD_STORAGE_BUCKET: r-clifton
+    SQLALCHEMY_DATABASE_URI: >-
+      mysql+pymysql://root:045w826fgzO3pIF3@/website_db?unix_socket=/cloudsql/r-clifton:us-west1:r-clifton-db
 #[END env]
 
 # Handlers define how to route requests to your application.
@@ -27,6 +28,9 @@ handlers:
 - url: /.*
   script: main.app
 # [END handlers]
+
+beta_settings:
+    cloud_sql_instances: r-clifton:us-west1:r-clifton-db
 
 
 # App Engine serves and caches static files contained in the listed directories

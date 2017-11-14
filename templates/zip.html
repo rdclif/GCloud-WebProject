@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+<div class="head-container-zip">
+    <div class="head-slide-zip">
+        <h4>ZIP Code Radius Search:</h4>
+        <form id="zip-search">
+            <input type="search" name="zip-code" placeholder="97089" id="zip" required>
+            <select id="dist" required>
+                <option disabled selected>Radius</option>
+                <option value="1">1 Mi</option>
+                <option value="2">2 Mi</option>
+                <option value="5">5 Mi</option>
+                <option value="10">10 Mi</option>
+                <option value="20">20 Mi</option>
+                <option value="50">50 Mi</option>
+            </select>
+            <button type="submit">Go</button>
+        </form>
+    </div>
+</div>
+<div class="zip-code-table">
+    <table id="zip-table">
+
+    </table>
+</div>
+</body>
+{% endblock %}

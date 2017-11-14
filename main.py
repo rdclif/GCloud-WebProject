@@ -1,16 +1,82 @@
-from google.cloud import datastore
+#from google.cloud import datastore
 import requests
 import json
+import datetime
 import appScripts
 import config
+import os
+import numpy as np
+import math
+
+
 
 from flask import Flask, render_template, request, session, redirect, Response, current_app
+from flask_sqlalchemy import SQLAlchemy
+import sqlalchemy
+
 app = Flask(__name__)
+
+
+# Environment variables are defined in app.yaml.
+
+if (config.DEBUG):
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
+
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Visit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime())
+    user_ip = db.Column(db.String(46))
+
+    def __init__(self, timestamp, user_ip):
+        self.timestamp = timestamp
+        self.user_ip = user_ip
+
+class Zip(db.Model):
+    __tablename__ = 'zips'
+
+    zip_id = db.Column(db.INT, autoincrement=True, primary_key=True)
+    zip = db.Column(db.String(20))
+    city = db.Column(db.String(50))
+    st = db.Column(db.String(10))
+    lat = db.Column(db.Float(10))
+    lon = db.Column(db.Float(10))
+
+    def __init__(self, zip_code, city, st, lat, lon):
+        self.zip = zip_code
+        self.city = city
+        self.st = st
+        self.lat = lat
+        self.lon = lon
+
+    def __repr__(self):
+        return 'Zip: {}, City: {}, State: {}, Lat: {}, Lon: {}'.format(self.zip, self.city, self.st, self.lat, self.lon)
 
 
 # Home page
 @app.route('/')
 def home():
+    user_ip = request.remote_addr
+
+    # Keep only the first two octets of the IP address.
+    if appScripts.is_ipv6(user_ip):
+        user_ip = ':'.join(user_ip.split(':')[:2])
+    else:
+        user_ip = '.'.join(user_ip.split('.')[:2])
+
+    visit = Visit(
+        user_ip=user_ip,
+        timestamp=datetime.datetime.utcnow()
+    )
+
+    db.session.add(visit)
+    db.session.commit()
     return render_template('home.html')
 
 
@@ -23,6 +89,79 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+# zip code page
+@app.route('/zip')
+def zip():
+    return render_template('zip.html')
+
+# Zipcode Get request -
+@app.route('/zipRequest/<zip>', defaults={'dist': None}, methods=['POST'])
+@app.route('/zipRequest/<zip>/<dist>', methods=['POST'])
+def zipRequest(zip, dist):
+    if request.method == 'POST':
+        if(zip):
+            if(dist):
+                #in case of error
+                if (dist == 'null'):
+                    dist = '5'
+                d = int(dist)
+            else:
+                d = 5
+
+            center = Zip.query.filter(Zip.zip == zip).first()
+            if center is not None:
+                lat = center.lat
+                lon = center.lon
+                #of the earth in miles!
+                r = 3959
+
+                latN = np.rad2deg(np.arcsin(np.sin(np.deg2rad(lat)) * np.cos(d / r) + np.cos(np.deg2rad(lat)) * np.sin(d / r) * np.cos(np.deg2rad(0))))
+                latS = np.rad2deg(np.arcsin(np.sin(np.deg2rad(lat)) * np.cos(d / r) + np.cos(np.deg2rad(lat)) * np.sin(d / r) * np.cos(np.deg2rad(180))))
+                lonE = np.rad2deg(np.deg2rad(lon) + np.arctan2(np.sin(np.deg2rad(90)) * np.sin(d / r) * np.cos(np.deg2rad(lat)), np.cos(d / r) - np.sin(np.deg2rad(lat)) * np.sin(np.deg2rad(latN))))
+                lonW = np.rad2deg(np.deg2rad(lon) + np.arctan2(np.sin(np.deg2rad(270)) * np.sin(d / r) * np.cos(np.deg2rad(lat)), np.cos(d / r) - np.sin(np.deg2rad(lat)) * np.sin(np.deg2rad(latN))))
+
+
+                latN = np.asscalar(latN)
+                latS = np.asscalar(latS)
+                lonE = np.asscalar(lonE)
+                lonW = np.asscalar(lonW)
+                #print("{} {} {} {}".format(latN, latS, lonE, lonW))
+
+                list = Zip.query.filter(db.and_(Zip.lat <= latN, Zip.lat >= latS, Zip.lon <= lonE, Zip.lon >= lonW)).filter(db.and_(Zip.zip != zip)).order_by(Zip.st, Zip.city, Zip.lat, Zip.lon)
+
+                output = []
+
+                for x in list:
+                    list_item = {'zip': x.zip, "city": x.city, "st": x.st, "lat": x.lat, "lon": x.lon}
+                    output.append(list_item)
+
+
+                txt_output = json.dumps(output)
+
+                return Response(txt_output, mimetype='text/xml')
+            else:
+                output = "bad request"
+            return Response(output, mimetype='text/xml')
+        else:
+            return appScripts.fBadRequest()
+    else:
+
+        return appScripts.fBadRequest()
+
+#based on the gcloud demo
+@app.route('/ipList', methods=['GET'])
+def ipLits():
+    visits = Visit.query.order_by(sqlalchemy.desc(Visit.timestamp)).limit(10)
+
+    results = [
+        'Time: {} Addr: {}'.format(x.timestamp, x.user_ip)
+        for x in visits]
+
+    output = 'Last 10 visits:\n{}'.format('\n'.join(results))
+
+    return Response(output, mimetype='text/xml')
+
 
 # Blog - Not currently used
 # @app.route('/blog')
