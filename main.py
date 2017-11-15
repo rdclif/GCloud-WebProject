@@ -64,12 +64,6 @@ class Zip(db.Model):
 def home():
     user_ip = request.remote_addr
 
-    # Keep only the first two octets of the IP address.
-    if appScripts.is_ipv6(user_ip):
-        user_ip = ':'.join(user_ip.split(':')[:2])
-    else:
-        user_ip = '.'.join(user_ip.split('.')[:2])
-
     visit = Visit(
         user_ip=user_ip,
         timestamp=datetime.datetime.utcnow()
@@ -95,7 +89,7 @@ def contact():
 def zip():
     return render_template('zip.html')
 
-# Zipcode Get request -
+# Zipcode POST request -
 @app.route('/zipRequest/<zip>', defaults={'dist': None}, methods=['POST'])
 @app.route('/zipRequest/<zip>/<dist>', methods=['POST'])
 def zipRequest(zip, dist):
@@ -152,13 +146,13 @@ def zipRequest(zip, dist):
 #based on the gcloud demo
 @app.route('/ipList', methods=['GET'])
 def ipLits():
-    visits = Visit.query.order_by(sqlalchemy.desc(Visit.timestamp)).limit(10)
+    visits = Visit.query.order_by(sqlalchemy.desc(Visit.timestamp)).limit(20)
 
     results = [
         'Time: {} Addr: {}'.format(x.timestamp, x.user_ip)
         for x in visits]
 
-    output = 'Last 10 visits:\n{}'.format('\n'.join(results))
+    output = 'Last 20 visits:\n{}'.format('\n'.join(results))
 
     return Response(output, mimetype='text/xml')
 

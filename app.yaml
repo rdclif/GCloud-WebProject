@@ -15,9 +15,9 @@ runtime_config:
 #[START env]
 env_variables:
     #CLOUD_STORAGE_BUCKET: r-clifton
-    SQLALCHEMY_DATABASE_URI: >-
-      mysql+pymysql://root:045w826fgzO3pIF3@/website_db?unix_socket=/cloudsql/r-clifton:us-west1:r-clifton-db
+    SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:045w826fgzO3pIF3@/website_db?unix_socket=/cloudsql/r-clifton:us-west1:r-clifton-db
 #[END env]
+
 
 # Handlers define how to route requests to your application.
 # [START handlers]
@@ -29,21 +29,13 @@ handlers:
   script: main.app
 # [END handlers]
 
-beta_settings:
-    cloud_sql_instances: r-clifton:us-west1:r-clifton-db
-
-
 # App Engine serves and caches static files contained in the listed directories
 # (and subdirectories). Uncomment and set the directory as needed.
 #- url: /client
 #  static_dir: client
 
-# This handler tells app engine how to route requests to a WSGI application.
-# The script value is in the format <path.to.module>.<wsgi_application>
-# where <wsgi_application> is a WSGI application object.
-- url: .*  # This regex directs all routes to main.app
-  script: main.app
-
+beta_settings:
+    cloud_sql_instances: r-clifton:us-west1:r-clifton-db
 # Third party libraries that are included in the App Engine SDK must be listed
 # here if you want to use them.  See
 # https://developers.google.com/appengine/docs/python/tools/libraries27 for
