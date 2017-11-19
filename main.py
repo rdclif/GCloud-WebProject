@@ -33,10 +33,14 @@ class Visit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime())
     user_ip = db.Column(db.String(46))
+    user_city = db.Column(db.String(46))
+    user_country = db.Column(db.String(46))
 
-    def __init__(self, timestamp, user_ip):
+    def __init__(self, timestamp, user_ip, user_city, user_country):
         self.timestamp = timestamp
         self.user_ip = user_ip
+        self.user_city = user_city
+        self.user_country = user_country
 
 class Zip(db.Model):
     __tablename__ = 'zips'
@@ -62,11 +66,29 @@ class Zip(db.Model):
 # Home page
 @app.route('/')
 def home():
-    user_ip = request.remote_addr
+    user_ip = request.environ['REMOTE_ADDR']
+    request_url = "https://ipinfo.io/" + user_ip + "/json"
+    city = "None"
+    county = "None"
+    r = requests.get(request_url)
+
+    if r is not None:
+        data = r.json()
+        print(data)
+        try:
+            city = data['city']
+            county = data['country']
+        except:
+            city = "None"
+            county = "None"
+
+
 
     visit = Visit(
         user_ip=user_ip,
-        timestamp=datetime.datetime.utcnow()
+        timestamp=datetime.datetime.utcnow(),
+        user_city=city,
+        user_country=county
     )
 
     db.session.add(visit)
@@ -149,7 +171,7 @@ def ipLits():
     visits = Visit.query.order_by(sqlalchemy.desc(Visit.timestamp)).limit(20)
 
     results = [
-        'Time: {} Addr: {}'.format(x.timestamp, x.user_ip)
+        'Time: {}, Addr: {}, City: {}, Country: {}'.format(x.timestamp, x.user_ip, x.user_city, x.user_country)
         for x in visits]
 
     output = 'Last 20 visits:\n{}'.format('\n'.join(results))
