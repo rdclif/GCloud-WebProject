@@ -530,3 +530,10 @@ footer {
 #zip-table td {
    padding: 6px;
 }
+
+
+
+#map {
+    margin-top: 20px;
+    height: 200px;
+}

@@ -152,8 +152,10 @@ def zipRequest(zip, dist):
                     list_item = {'zip': x.zip, "city": x.city, "st": x.st, "lat": x.lat, "lon": x.lon}
                     output.append(list_item)
 
+                map_center = {'lat': lat, 'lon': lon}
+                out_array = [map_center, output]
 
-                txt_output = json.dumps(output)
+                txt_output = json.dumps(out_array)
 
                 return Response(txt_output, mimetype='text/xml')
             else:
